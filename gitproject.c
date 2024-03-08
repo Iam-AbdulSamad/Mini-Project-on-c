@@ -4,9 +4,12 @@ char player1[15];
 char player2[15];
 char choice;
 char c;
+char box[10][5] = {"  ", "  ", " ", "  ", "  ", " ", "  ", "  ", " "};
 
 void menu()
 {
+    while (1)
+    {
     system("cls");
     printf("\t\t\tX - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O\n");
     printf("\t\t\t|                                                                           |\n");
@@ -27,9 +30,11 @@ void menu()
     printf("\t\t\tX - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O\n\n");
     printf("ENTER THE OPTION : ");
     scanf("%c", &c);
+    }
 }
 void gameboard()
 {
+    printf("\n");
     char box[10][5] = {"  ", "  ", " ", "  ", "  ", " ", "  ", "  ", " "};
     printf("\t\t     |     |     \n");
     printf("\t\t  %s |  %s |  %s  \n", box[0], box[1], box[2]);
@@ -76,6 +81,10 @@ here:
 
 void help()
 {
+    char back;
+    printf("THIS IS A TWO PLAYER GAME.\nYOU HAVE SELECT 'X' OR 'O' AT YOUR TURN\nIF THREE 'X' OR THREE 'O' ARE MARKED VERITCALLY, HORIZONTALLY OR DIAGONALLY AT THE END THEN THE PLAYER WINS");
+    printf("\n\vPRESS ANY 'B' TO GO BACK...");
+    scanf("%c",&back);
 }
 int main()
 {
