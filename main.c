@@ -2,7 +2,8 @@
 #include "windows.h"
 char player1[15];
 char player2[15];
-char choice;
+char choice_1;
+char choice_2;
 char c;
 
 void menu()
@@ -26,7 +27,8 @@ void menu()
     printf("\t\t\t|                                                                           |\n");
     printf("\t\t\tX - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O\n\n");
     printf("ENTER THE OPTION : ");
-    scanf("%c", &c);
+    c=toupper(fgetc(stdin));
+    fflush(stdin);
 }
 void gameboard()
 {
@@ -43,57 +45,63 @@ void gameboard()
 }
 int start()
 {
-
     printf("ENTER PLAYER 1 NAME :");
     fflush(stdin);
     gets(player1);
-here:
+    // here:
+    while(1){
     printf("ENTER YOUR CHOICE ('X' OR 'O'): ");
+    choice_1=toupper(fgetc(stdin));
     fflush(stdin);
-    scanf("%c", &choice);
-    if (choice == 'X' || choice == 'x' || choice == 'O' || choice == 'o')
+    if (choice_1 == 'X' || choice_1 == 'O')
     {
-
-        printf("PLAYER 1 %s's CHOICE CONFIRMED - %c\n", player1, choice);
+        printf("PLAYER 1 %s's CHOICE CONFIRMED - %c\n", player1, choice_1);
         printf("ENTER PLAYER 2 NAME :");
         fflush(stdin);
         gets(player2);
-        if (choice == 'X' || choice == 'x')
+        if (choice_1 == 'X' || choice_1 == 'x')
         {
-            printf("PLAYER 2 %s's CHOICE CONFIRMED - O\n", player2);
+            choice_2 = 'O' ;
+            printf("PLAYER 2 %s's CHOICE CONFIRMED - %c\n", player2, choice_2);
         }
         else
         {
-            printf("PLAYER 2 %s's CHOICE CONFIRMED - X\n", player2);
+            choice_1 = 'X';
+            printf("PLAYER 2 %s's CHOICE CONFIRMED - %c\n", player2, choice_2);
         }
+        break;
     }
     else
     {
         printf("\nWRONG CHOICE!, TRY AGAIN\n");
-        goto here;
     }
+    }
+    return 0;
 }
 
 void help()
 {
+    printf("\t\tWELCOME TO TIC -TAC-TOE GAME");
 }
 int main()
 {
     menu();
-    if (c == 'S' || c == 's')
+    if ( c == 'S' )
     {
         system("cls");
         start();
     }
-    else if (c == 'H' || c == 'h')
+    else if ( c == 'H' )
     {
-        // help();
+        help();
     }
-    else if (c == 'Q' || c == 'q')
+    else if ( c == 'Q' )
     {
         exit(0);
     }
-    gameboard();
+    printf("player-1 choice: %c",choice_1);
+    printf("player-2 choice: %c",choice_2);
+    // gameboard();
 
     return 0;
 }
