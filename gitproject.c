@@ -4,11 +4,13 @@ char player1[15];
 char player2[15];
 char choice1, choice2;
 char c;
+int i;
 char OPTION_1, OPTION_2;
 char box[11] = {"123456789"};
 int gamers_turn();
+int display_choice(int num, char turn);
+int winning_condition();
 void gameboard();
-
 void menu()
 {
     system("cls");
@@ -109,62 +111,162 @@ void help()
     //         help();
     //     }
 }
+int winning_condition(){
+    if(box[0] == OPTION_1 && box[1] == OPTION_1 && box[2] == OPTION_1 && OPTION_2){
+        if(box[0] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[3] == OPTION_1 && box[4] == OPTION_1 && box[5] == OPTION_1 && OPTION_2){
+        if(box[3] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[6] == OPTION_1 && box[7] == OPTION_1 && box[8] == OPTION_1 && OPTION_2){
+        if(box[6] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[0] == OPTION_1 && box[4] == OPTION_1 && box[8] == OPTION_1 && OPTION_2){
+        if(box[0] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[2] == OPTION_1 && box[4] == OPTION_1 && box[6] == OPTION_1 && OPTION_2){
+        if(box[2] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[0] == OPTION_1 && box[3] == OPTION_1 && box[6] == OPTION_1 && OPTION_2){
+        if(box[0] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[1] == OPTION_1 && box[4] == OPTION_1 && box[7] == OPTION_1 && OPTION_2){
+        if(box[1] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else if(box[2] == OPTION_1 && box[5] == OPTION_1 && box[8] == OPTION_1 && OPTION_2){
+        if(box[2] == OPTION_1){
+        printf("player-1 wins!!");
+        exit(1);
+        }
+        else{
+        printf("player-2 wins!!");
+        exit(1);
+        }
+    }
+    else{
+       
+    }
+    return 0;
+}
 int gamers_turn()
 {
     char turn;
-    turn = OPTION_1;
+    turn = 'X';
     int num;
-    int j = 0;
-    int i = 0;
     if (turn || turn)
     {
-        while (i < 2)
+        if (choice1 == turn )
         {
-            if (i == 0)
+            i = 0;
+        }
+        else
+        {
+            i = 1;
+        }
+        while (i < 15)
+        {
+
+            if (i % 2 == 0)
             {
                 printf("\n\t\t%s's TURN ---\n\t\t%s choice - '%c'\n\n", player1, player1, choice1);
                 printf("\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
                 scanf("%d", &num);
+                turn = display_choice(num, turn);
+                winning_condition();
+                Sleep(1500);
+                turn = OPTION_2;
                 i++;
             }
-            else
+            else if (i % 2 == 1)
             {
                 printf("\n\t\t%s's TURN ---\n\t\t%s choice - '%c'\n\n", player2, player2, choice2);
                 printf("\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
                 scanf("%d", &num);
-                i--;
-            }
-            while(j<9){
-                if( num>0 && num<10 ){
-                    if( box[num-1] != 'X'&& box[num-1] != 'O'){
-                        box[num -1] = turn ;
-                        gameboard();
-                        j++;
-                        Sleep(1500);
-                        OPTION_1 = OPTION_2;
-                        OPTION_2 = turn;
-                        turn = OPTION_1;
-                        break;
-                    }
-                    else if ( box[num-1] == choice1 ){
-                        printf("THE BOX IS ALLREADY OCUPIED");
-                        i--;
-                        break;
-                    }
-                    else{
-                        printf("THE BOX IS ALLREADY OCUPIED");
-                        i++;
-                        break;
-                    }
-                    }
-                    else{
-                        printf("you entered wrong number");
-                        j--;
+                turn = display_choice(num, turn);
+                winning_condition();
+                Sleep(1500);
+                turn = OPTION_1;
+                if(i == 9){
+                    break;
                 }
+                i++;
+            }
+            else
+            {
+                printf("TURNED SKIPPED (INCORRECT CHOICE)\n");
             }
         }
     }
     return 0;
+}
+int display_choice(int num, char turn)
+{
+    if (num > 0 && num < 10)
+    {
+        if( box[num -1] != 'X' && box[num -1] != 'O') 
+        box[num - 1] = turn;
+        gameboard();
+    }
+    else if (turn == choice1){
+        printf("\n\n\tYOU HAVE ENTERED WRONG NUMBER");
+        Sleep(1000);
+        i--;
+    }
+    else{
+        printf("\n\n\tYOU HAVE ENTERED WRONG NUMBER");
+        Sleep(1000);
+        i++;
+    }
+    return turn;
 }
 
 int main()
