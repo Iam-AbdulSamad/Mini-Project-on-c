@@ -6,8 +6,7 @@ char choice1, choice2;
 char c;
 char OPTION_1, OPTION_2;
 char box[11] = {"123456789"};
-int player1_turn();
-int player2_turn();
+int gamers_turn();
 void gameboard();
 
 void menu()
@@ -112,11 +111,12 @@ void help()
 }
 int gamers_turn()
 {
-    char temp;
-    temp = OPTION_1;
+    char turn;
+    turn = OPTION_1;
     int num;
+    int j = 0;
     int i = 0;
-    if (temp || temp)
+    if (turn || turn)
     {
         while (i < 2)
         {
@@ -134,62 +134,37 @@ int gamers_turn()
                 scanf("%d", &num);
                 i--;
             }
-
-            if (num == 1)
-            {
-                box[0] = temp;
-                gameboard();
+            while(j<9){
+                if( num>0 && num<10 ){
+                    if( box[num-1] != 'X'&& box[num-1] != 'O'){
+                        box[num -1] = turn ;
+                        gameboard();
+                        j++;
+                        Sleep(1500);
+                        OPTION_1 = OPTION_2;
+                        OPTION_2 = turn;
+                        turn = OPTION_1;
+                        break;
+                    }
+                    else if ( box[num-1] == choice1 ){
+                        printf("THE BOX IS ALLREADY OCUPIED");
+                        i--;
+                        break;
+                    }
+                    else{
+                        printf("THE BOX IS ALLREADY OCUPIED");
+                        i++;
+                        break;
+                    }
+                    }
+                    else{
+                        printf("you entered wrong number");
+                        j--;
+                }
             }
-            else if (num == 2)
-            {
-                box[1] = temp;
-                gameboard();
-            }
-            else if (num == 3)
-            {
-                box[2] = temp;
-                gameboard();
-            }
-            else if (num == 4)
-            {
-                box[3] = temp;
-                gameboard();
-            }
-            else if (num == 5)
-            {
-                box[4] = temp;
-                gameboard();
-            }
-            else if (num == 6)
-            {
-                box[5] = temp;
-                gameboard();
-            }
-            else if (num == 7)
-            {
-                box[6] = temp;
-                gameboard();
-            }
-            else if (num == 8)
-            {
-                box[7] = temp;
-                gameboard();
-            }
-            else if (num == 9)
-            {
-                box[8] = temp;
-                gameboard();
-            }
-            else
-            {
-                printf("TURNED SKIPPED (INCORRECT CHOICE)\n");
-            }
-            Sleep(1500);
-            OPTION_1 = OPTION_2;
-            OPTION_2 = temp;
-            temp = OPTION_1;
         }
     }
+    return 0;
 }
 
 int main()
