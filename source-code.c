@@ -32,59 +32,77 @@ void menu()                   // menu of the game
     printf("\t\t\tX - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O - X - O\n\n");
     printf("ENTER THE OPTION : ");
     choice = toupper(fgetc(stdin));
+    Beep(800, 500);
     fflush(stdin);
 }
 void gameboard() // game board
 {
     printf("\n");
-    printf("\t\t\t     |     |     \n");
-    Sleep(200);
-    printf("\t\t\t  %c  |  %c  |  %c  \n", box[0], box[1], box[2]);
-    Sleep(200);
-    printf("\t\t\t_____|_____|_____\n");
-    Sleep(200);
-    printf("\t\t\t     |     |     \n");
-    Sleep(200);
-    printf("\t\t\t  %c  |  %c  |  %c  \n", box[3], box[4], box[5]);
-    Sleep(200);
-    printf("\t\t\t_____|_____|_____\n");
-    Sleep(200);
-    printf("\t\t\t     |     |     \n");
-    Sleep(200);
-    printf("\t\t\t  %c  |  %c  |  %c  \n", box[6], box[7], box[8]);
-    Sleep(200);
-    printf("\t\t\t     |     |     \n");
+    printf("\t\t\t\t\t\t\t        |     |     \n");
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t     %c  |  %c  |  %c  \n", box[0], box[1], box[2]);
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t   _____|_____|_____\n");
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t        |     |     \n");
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t     %c  |  %c  |  %c  \n", box[3], box[4], box[5]);
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t   _____|_____|_____\n");
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t        |     |     \n");
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t     %c  |  %c  |  %c  \n", box[6], box[7], box[8]);
+    Sleep(150);
+    printf("\t\t\t\t\t\t\t        |     |     \n");
+}
+void reset_board(gameboard)
+{
+    box[0] = '1';
+    box[1] = '2';
+    box[2] = '3';
+    box[3] = '4';
+    box[4] = '5';
+    box[5] = '6';
+    box[6] = '7';
+    box[7] = '8';
+    box[8] = '9';
 }
 void DECISION()
 {
+    Sleep(1000);
+    Beep(700, 700);
+    Beep(700, 1000);
     fflush(stdin);
-    printf("\v\v\t -------------------------      -----------------------------        -------------------\n");
-    printf("\t| PRESS 'P' TO PLAY AGAIN |    | PRESS 'B' TO RETURN TO MENU |      | PRESS 'Q' TO QUIT |\n");
-    printf("\t -------------------------      -----------------------------        -------------------\n");
-decision:
-    printf("\n\n\tENTER THE OPTION ----->> "); // taking input from user
-    fflush(stdin);
-    decision = toupper(getc(stdin)); // captalising input
-    if (decision == 'P')
+    printf("\v\v\t\t\t\t -------------------------      -----------------------------        -------------------\n");
+    printf("\t\t\t\t| PRESS 'P' TO PLAY AGAIN |    | PRESS 'B' TO RETURN TO MENU |      | PRESS 'Q' TO QUIT |\n");
+    printf("\t\t\t\t -------------------------      -----------------------------        -------------------\n");
+    while (1)
     {
-        // gamers_turn();
-        system("cls");
-        start();
-    }
-    else if (decision == 'B')
-    {
-        main();
-    }
-    else if (decision == 'Q')
-    {
-        exit(1);
-    }
-    else
-    {
-        printf("\n\n\tENTER THE CORRECT OPTION");
-        Sleep(600);
-        system("cls");
-        goto decision;
+        printf("\n\n\t\t\t\tENTER THE OPTION ----->> "); // taking input from user
+        fflush(stdin);
+        decision = toupper(getc(stdin)); // captalising input
+        Beep(800, 600);
+        if (decision == 'P')
+        {
+            system("cls");
+            reset_board();
+            start();
+        }
+        else if (decision == 'B')
+        {
+            reset_board();
+            main();
+        }
+        else if (decision == 'Q')
+        {
+            exit(1);
+        }
+        else
+        {
+            printf("\n\n\tPLEASE ENTER THE CORRECT OPTION");
+            Sleep(500);
+        }
     }
 }
 int start()
@@ -92,10 +110,12 @@ int start()
     printf("\tENTER PLAYER 1 NAME : ");
     fflush(stdin);
     gets(player1); // take the player 1 name
+    Beep(800, 400);
     while (1)
     {
         printf("\tENTER YOUR CHOICE ('X' OR 'O'): ");
         choice1 = toupper(fgetc(stdin)); // take the player 1 choice
+        Beep(800, 400);
         fflush(stdin);
         OPTION_1 = choice1; // store the choice1 in option 1
         if (choice1 == 'X' || choice1 == 'O')
@@ -105,6 +125,7 @@ int start()
             printf("\tENTER PLAYER 2 NAME : ");
             fflush(stdin);
             gets(player2); // take the player 2 name
+            Beep(800, 400);
             if (choice1 == 'X')
             {
                 choice2 = 'O';
@@ -126,14 +147,10 @@ int start()
         }
     }
     Sleep(1500);
-    system("cls");
-    printf("\n\n\t\t\t\t\t---------------------- LET'S START ----------------------\n\n");
     Sleep(300);
-    gameboard();
     gamers_turn();
     return 0;
 }
-
 void help()
 {
     char back; // stores input from user
@@ -141,7 +158,8 @@ void help()
     printf("\n\vPRESS 'B' TO GO BACK...");
     fflush(stdin);
     back = toupper(getc(stdin)); // taking input from user and captalising the character
-    if (back == 'B')             // checking if user entered letter 'B'
+    Beep(800, 600);
+    if (back == 'B') // checking if user entered letter 'B'
     {
         menu();
     }
@@ -173,17 +191,20 @@ int gamers_turn() //  switch the player turn according to game
         {
             if (turn_s % 2 == 0) // even turn
             {
-                printf("\n\t\t\t   \" %s's TURN \"\n\n\t\tYOUR CHOICE ' %c '\n", player1, choice1);
+                system("cls");
+                printf("\n\n\t\t\t\t\t---------------------- LET'S START ----------------------\n\n");
+                gameboard();
+                printf("\n\t\t\t\t\t\t\t     \" %s's TURN \"\n\n\t\t\t\tYOUR CHOICE ' %c '\n", player1, choice1);
                 while (1)
                 {
-                    printf("\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
+                    printf("\t\t\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
                     scanf("%d", &num);
+                    Beep(800, 600);
                     if (num > 0 && num < 10) // check 0 < num < 10
                     {
                         if (box[num - 1] != 'X' && box[num - 1] != 'O') // check weeather the box is filled or not
                         {
                             box[num - 1] = turn;
-                            gameboard();
                         }
                         else // if the board is occuipied
                         {
@@ -213,17 +234,20 @@ int gamers_turn() //  switch the player turn according to game
             }
             else
             {
-                printf("\n\t\t\t   \" %s's TURN \"\n\n\t\tYOUR CHOICE ' %c '\n", player2, choice2);
+                system("cls");
+                printf("\n\n\t\t\t\t\t---------------------- LET'S START ----------------------\n\n");
+                gameboard();
+                printf("\n\t\t\t\t\t\t\t     \" %s's TURN \"\n\n\t\t\t\tYOUR CHOICE ' %c '\n", player2, choice2);
                 while (1)
                 {
-                    printf("\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
+                    printf("\t\t\t\tENTER THE NUMBER TO MARK ON THE BOARD : ");
                     scanf("%d", &num);
+                    Beep(800, 600);
                     if (num > 0 && num < 10) // check 0 < num < 10
                     {
                         if (box[num - 1] != 'X' && box[num - 1] != 'O') // check weeather the box is filled or not
                         {
                             box[num - 1] = turn;
-                            gameboard();
                         }
                         else // if the board is occuipied
                         {
@@ -242,8 +266,8 @@ int gamers_turn() //  switch the player turn according to game
                     else // if the number is invalid ( 0 or more than 10 )
                     {
                         printf("\n\n\tINVALID BOX NUMBER ( 1 - 9 )\n\n");
-                        break;
                         Sleep(900);
+                        break;
                     }
                 }
                 if (BOX == 9) // if box = 9 ends the game
@@ -265,11 +289,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1) // if turn = option 1 where option 1 is choice 1 so player 1 wins
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else // other wise player 2 wins
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -278,11 +302,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -291,11 +315,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -304,11 +328,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -317,11 +341,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -330,11 +354,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -343,11 +367,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
@@ -356,11 +380,11 @@ int winning_condition(int turn) // check the winning condition of players
     {
         if (turn == OPTION_1)
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 1 '%s' WINS !!! [][][][][]", player1);
         }
         else
         {
-            printf("\n\n\t\t[][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
+            printf("\n\n\t\t\t\t\t\t  [][][][][] PLAYER - 2 '%s' WINS !!! [][][][][]", player2);
         }
         DECISION();
         exit(1);
