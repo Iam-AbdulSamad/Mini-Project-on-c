@@ -10,6 +10,7 @@ char choice;                  // takes the choice of the user from menu
 int turn_s;                   // stores the turns of the game
 char OPTION_1, OPTION_2;      // stores the choice1 and choice2
 char box[11] = {"123456789"}; // print on the board
+int index=0;
 void menu()                   // menu of the game
 {
     system("cls");
@@ -87,7 +88,7 @@ void DECISION()
         {
             system("cls");
             reset_board();
-            start();
+            gamers_turn();
         }
         else if (decision == 'B')
         {
@@ -110,17 +111,18 @@ int start()
     printf("\tENTER PLAYER 1 NAME : ");
     fflush(stdin);
     gets(player1); // take the player 1 name
-    Beep(800, 400);
+    // Beep(800, 400);
     while (1)
     {
         printf("\tENTER YOUR CHOICE ('X' OR 'O'): ");
         choice1 = toupper(fgetc(stdin)); // take the player 1 choice
-        Beep(800, 400);
+        // Beep(800, 400);
         fflush(stdin);
         OPTION_1 = choice1; // store the choice1 in option 1
         if (choice1 == 'X' || choice1 == 'O')
         {
             printf("\n\t\tPLAYER 1 ( %s ) CHOICE CONFIRMED --> \"%c\"\n\n", strupr(player1), choice1); // player 1 choice conformation
+            Beep(800, 400);
             Sleep(500);
             printf("\tENTER PLAYER 2 NAME : ");
             fflush(stdin);
@@ -131,18 +133,21 @@ int start()
                 choice2 = 'O';
                 OPTION_2 = choice2;                                                                      // store the choice2 in option 2
                 printf("\n\t\tPLAYER 2 ( %s ) CHOICE CONFIRMED --> \"%c\"\n", strupr(player2), choice2); // player 2 choice conformation
+                Beep(800, 400);
             }
             else
             {
                 choice2 = 'X';
                 OPTION_2 = choice2;                                                              // store the choice2 in option 2
                 printf("\n\t\tPLAYER 2 ( %s ) CHOICE CONFIRMED --> \"%c\"\n", player2, choice2); // player 2 choice conformation
+                Beep(800, 400);
             }
             break;
         }
         else
         {
             printf("\n\t\tWRONG CHOICE!, TRY AGAIN!!\n\n"); // if the choice is not ( X - O )
+            Beep(800, 400);
             Sleep(1000);
         }
     }
